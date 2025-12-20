@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Typography, Progress, Row, Col } from 'antd';
-import { CodeOutlined, DatabaseOutlined, ToolOutlined, StarOutlined, TrophyOutlined } from '@ant-design/icons';
+import { Card, Typography, Row, Col } from 'antd';
+import { CodeOutlined, DatabaseOutlined, ToolOutlined, TrophyOutlined } from '@ant-design/icons';
 
 const { Title, Paragraph } = Typography;
 

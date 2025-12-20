@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Card, Row, Col, Typography, message, Space } from 'antd';
-import { PhoneOutlined, UserOutlined, GlobalOutlined, LinkedinOutlined, GithubOutlined, MailOutlined, SendOutlined, MessageOutlined, HeartOutlined } from '@ant-design/icons';
+import { PhoneOutlined, GlobalOutlined, LinkedinOutlined, GithubOutlined, MailOutlined, SendOutlined, MessageOutlined, HeartOutlined } from '@ant-design/icons';
 
 const { TextArea } = Input;
 const { Title, Paragraph } = Typography;

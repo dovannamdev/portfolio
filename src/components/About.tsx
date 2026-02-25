@@ -17,7 +17,7 @@ const useScrollReveal = (ref: React.RefObject<HTMLElement | null>) => {
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
-  }, []);
+  }, [ref]);
 };
 
 const About: React.FC = () => {

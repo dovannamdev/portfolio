@@ -1,91 +1,107 @@
-import React, { useState, useEffect } from 'react';
-import { Layout, Menu, Button, Drawer } from 'antd';
-import { MenuOutlined } from '@ant-design/icons';
-
-const { Header: AntHeader } = Layout;
+import React, { useState, useEffect } from "react";
 
 const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      const sections = [
+        "hero",
+        "about",
+        "experience",
+        "projects",
+        "skills",
+        "contact",
+      ];
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.getBoundingClientRect().top <= 120) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    element?.scrollIntoView({ behavior: 'smooth' });
-    setIsMenuOpen(false);
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setMobileOpen(false);
   };
 
-  const menuItems = [
-    { key: 'hero', label: 'Home', onClick: () => scrollToSection('hero') },
-    { key: 'about', label: 'About', onClick: () => scrollToSection('about') },
-    { key: 'experience', label: 'Experience', onClick: () => scrollToSection('experience') },
-    { key: 'projects', label: 'Projects', onClick: () => scrollToSection('projects') },
-    { key: 'skills', label: 'Skills', onClick: () => scrollToSection('skills') },
-    { key: 'education', label: 'Education', onClick: () => scrollToSection('education') },
-    { key: 'contact', label: 'Contact', onClick: () => scrollToSection('contact') },
+  const navItems = [
+    { id: "about", label: "About" },
+    { id: "experience", label: "Experience" },
+    { id: "projects", label: "Projects" },
+    { id: "skills", label: "Skills" },
+    { id: "contact", label: "Contact" },
   ];
 
   return (
-    <AntHeader 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-slate-900/95 backdrop-blur-lg shadow-lg' 
-          : 'bg-slate-800/90 backdrop-blur-sm shadow-md'
-      } px-0`}
-    >
-      <div className=" mx-auto px-6 flex justify-between items-center h-full w-full">
-        <div className="text-white text-2xl font-bold tracking-tight">
-          ĐỖ VĂN NAM
-        </div>
-        
-        {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center space-x-8">
-          {menuItems.map((item) => (
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-[9999] px-6 h-16 flex items-center justify-between transition-all duration-300 ${
+          scrolled || mobileOpen
+            ? "bg-[#0a0a0f]/95 backdrop-blur-xl border-b border-white/6 shadow-lg"
+            : "bg-transparent border-b border-transparent"
+        }`}
+      >
+        <button
+          onClick={() => scrollTo("hero")}
+          className="bg-transparent border-none text-lg font-extrabold cursor-pointer tracking-tight"
+        >
+          <span className="gradient-text">DVN</span>
+        </button>
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex gap-1 items-center">
+          {navItems.map((item) => (
             <button
-              key={item.key}
-              onClick={item.onClick}
-              className="text-white hover:text-blue-400 font-medium transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-white/10"
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className={`border-none text-sm font-medium cursor-pointer px-4 py-2 rounded-lg transition-all duration-200 ${
+                activeSection === item.id
+                  ? "bg-blue-500/10 text-blue-500"
+                  : "bg-transparent text-[#8b8b9e] hover:text-[#f0f0f5]"
+              }`}
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
+
+        {/* Mobile Toggle */}
+        <button
+          className="md:hidden bg-transparent border-none text-[#f0f0f5] text-2xl cursor-pointer p-1"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          {mobileOpen ? "✕" : "☰"}
+        </button>
+      </header>
+
+      {/* Mobile Menu - outside header to avoid stacking issues */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-[9998] bg-[#0a0a0f]/98 backdrop-blur-2xl flex flex-col items-center justify-center gap-3 md:hidden">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className={`bg-transparent border-none text-2xl font-semibold cursor-pointer px-8 py-4 transition-all duration-200 ${
+                activeSection === item.id
+                  ? "text-blue-500 scale-110"
+                  : "text-[#8b8b9e] hover:text-[#f0f0f5]"
+              }`}
             >
               {item.label}
             </button>
           ))}
         </div>
-        
-        {/* Mobile Menu Button */}
-        <Button
-          type="text"
-          icon={<MenuOutlined className="text-xl" />}
-          className="lg:hidden bg-white text-gray-800 hover:text-blue-600 border border-gray-200 shadow-md"
-          onClick={() => setIsMenuOpen(true)}
-          size="large"
-          style={{ backgroundColor: 'white' }}
-        />
-        
-        {/* Mobile Drawer */}
-        <Drawer
-          title={<span className="text-xl font-bold">Navigation</span>}
-          placement="right"
-          onClose={() => setIsMenuOpen(false)}
-          open={isMenuOpen}
-          className="lg:hidden"
-          width={280}
-        >
-          <Menu
-            mode="vertical"
-            items={menuItems}
-            className="border-none text-base"
-            style={{ backgroundColor: 'transparent' }}
-          />
-        </Drawer>
-      </div>
-    </AntHeader>
+      )}
+    </>
   );
 };
 

@@ -1,231 +1,368 @@
-import React from 'react';
-import { Card, Button, Space, Typography, Tag } from 'antd';
-import { GithubOutlined, EyeOutlined, CalendarOutlined, ToolOutlined, CheckCircleOutlined, ProjectOutlined } from '@ant-design/icons';
-
-const { Title, Paragraph } = Typography;
+import React, { useEffect, useRef, useState } from "react";
+import { CalendarOutlined } from "@ant-design/icons";
 
 const Projects: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll(".fade-up").forEach((el) => {
+              el.classList.add("visible");
+            });
+          }
+        });
+      },
+      { threshold: 0.08 },
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   const projects = [
     {
-      title: "EnvMon - IoT Environmental Monitoring Platform",
+      title: "EnvMon — IoT Environmental Monitoring",
       period: "Nov 2025 — Present",
-      technologies: ["React", "NestJS", "PostgreSQL", "TimescaleDB", "Redis", "Stripe"],
-      description: "IoT environmental monitoring platform for tracking and analyzing sensor data from SwitchBot devices. Features time-series data storage, subscription billing, and real-time monitoring capabilities.",
-      features: [
-        "Acted as technical lead for a 4-member team, supporting the PM in task breakdown and coordinating implementation and code reviews",
-        "Integrated SwitchBot IoT devices with scheduled sync, rate limiting, and batch data processing",
-        "Implemented time-series data ingestion and storage using PostgreSQL + TimescaleDB to handle high-volume sensor readings",
-        "Implemented subscription billing workflows with Stripe, including plans, invoices, webhooks, and bank transfer support"
+      status: "Current",
+      company: "Bravesoft Vietnam",
+      technologies: [
+        "React",
+        "NestJS",
+        "PostgreSQL",
+        "TimescaleDB",
+        "Redis",
+        "Stripe",
       ],
-      demoLink: "#",
-      githubLink: "#",
-      color: "from-emerald-500 to-teal-600",
-      status: "Current"
+      description:
+        "IoT platform for tracking sensor data from SwitchBot devices with subscription billing.",
+      features: [
+        "Team lead for 4-member team with PM coordination",
+        "Integrated SwitchBot IoT devices with scheduled sync, rate limiting & batch processing",
+        "Time-series data ingestion with PostgreSQL + TimescaleDB for high-volume sensor readings",
+        "Subscription billing with Stripe: plans, invoices, webhooks, and bank transfers",
+        "End-to-end delivery with pixel-accurate UI aligned to design specs",
+      ],
+      gradient: "from-emerald-500 to-cyan-500",
+      shadow: "0 0 40px rgba(16, 185, 129, 0.12)",
+      demoUrl:
+        "https://drive.google.com/file/d/1nXUqHYIvYoKykcLCtM35XCuvcBeGwybm/view",
     },
     {
-      title: "JIM3 - AI Transcription SaaS Platform",
+      title: "JIM3 — AI Transcription SaaS",
       period: "Aug 2025 — Present",
-      technologies: ["React", "NestJS", "OpenAI Whisper API", "Server-Sent Events (SSE)", "Stripe", "Redis", "MySQL"],
-      description: "AI-powered transcription SaaS platform using OpenAI Whisper for audio transcription. Features real-time progress streaming, audio processing workflows, and pixel-accurate UI for waveform visualization.",
-      features: [
-        "Built an AI-powered transcription system using OpenAI Whisper, supporting audio uploads",
-        "Implemented Server-Sent Events (SSE) to stream transcription progress and results with reconnection handling",
-        "Designed backend workflows for audio processing and transcription lifecycle management",
-        "Built pixel-accurate React UI for audio upload, waveform visualization, and live transcription display"
+      status: "Current",
+      company: "Bravesoft Vietnam",
+      technologies: [
+        "React",
+        "NestJS",
+        "OpenAI Whisper",
+        "SSE",
+        "Stripe",
+        "Redis",
+        "MySQL",
       ],
-      demoLink: "#",
-      githubLink: "#",
-      color: "from-blue-500 to-indigo-600",
-      status: "Current"
+      description:
+        "AI-powered transcription platform using OpenAI Whisper with real-time streaming.",
+      features: [
+        "AI transcription system with OpenAI Whisper API for audio uploads",
+        "SSE streaming for real-time progress with reconnection handling",
+        "Backend workflows for audio processing & transcription lifecycle",
+        "Pixel-accurate React UI for audio upload, waveform visualization & live display",
+      ],
+      gradient: "from-blue-500 to-violet-500",
+      shadow: "0 0 40px rgba(59, 130, 246, 0.12)",
+      demoUrl:
+        "https://drive.google.com/file/d/1xTW7kXQBMvBagRigcVbQdQlbI0xKPN7w/view",
     },
     {
-      title: "Data Crawling Systems",
-      period: "Various",
-      technologies: ["Node.js", "Python", "PostgreSQL"],
-      description: "Built systems for automated data collection and processing from various sources.",
-      features: [
-        "Automated data collection",
-        "Data processing and storage",
-        "Scheduled sync and updates"
+      title: "Premium Chat — Real Estate Platform",
+      period: "2024",
+      status: "Completed",
+      company: "Bravesoft Vietnam",
+      technologies: [
+        "NextJS",
+        "Material UI",
+        "GraphQL",
+        "PostgreSQL",
+        "Sequelize",
       ],
-      demoLink: "#",
-      githubLink: "#",
-      color: "from-purple-500 to-pink-600",
-      status: "Completed"
+      description:
+        "Real estate platform connecting sellers and buyers with real-time chat communication.",
+      features: [
+        "UI implementation with Material UI & SCSS",
+        "GraphQL API integration for data fetching",
+        "Real-time chat with GraphQL Subscriptions",
+        "User-to-user direct messaging for property deals",
+      ],
+      gradient: "from-violet-500 to-pink-500",
+      shadow: "0 0 40px rgba(139, 92, 246, 0.12)",
     },
     {
-      title: "Realtime Chat Features",
-      period: "Various",
-      technologies: ["React", "Node.js", "WebSockets"],
-      description: "Implemented real-time chat functionality for various applications.",
+      title: "Fourlist Matching — Real Estate Data Crawling",
+      period: "2024",
+      status: "Completed",
+      company: "Bravesoft Vietnam",
+      technologies: ["Node.js", "PostgreSQL", "Redis", "Docker"],
+      description:
+        "Automated web scraping system crawling from SUUMO, HOME's, Yahoo and other Japanese property platforms to aggregate and match real estate listings.",
       features: [
-        "Real-time messaging",
-        "User presence indicators",
-        "Message history"
+        "Built crawling pipelines to scrape data from SUUMO, HOME's, Yahoo real estate",
+        "Implemented a matching feature to track and watch new listings in real-time",
+        "Scheduled cron jobs for periodic data sync and incremental updates",
+        "Redis-based queue for rate limiting, retry logic, and deduplication",
+        "Data cleaning, normalization, and matching based on user preferences",
       ],
-      demoLink: "#",
-      githubLink: "#",
-      color: "from-cyan-500 to-blue-600",
-      status: "Completed"
+      gradient: "from-indigo-500 to-blue-500",
+      shadow: "0 0 40px rgba(99, 102, 241, 0.12)",
     },
     {
-      title: "Digital Signature Workflows",
-      period: "Various",
-      technologies: ["React", "Node.js", "PostgreSQL"],
-      description: "Developed digital signature solutions for secure document signing.",
+      title: "Fourlist — Real Estate Listings",
+      period: "2024",
+      status: "Completed",
+      company: "Bravesoft Vietnam",
+      technologies: ["NextJS", "NodeJS", "MongoDB", "Mongoose", "Material UI"],
+      description:
+        "Real estate introduction and listing website with sales posting and order management.",
       features: [
-        "Secure signature implementation",
-        "Multi-party signing",
-        "Document management"
+        "NextJS SSR website with Material UI",
+        "API integration with Axios & React Query",
+        "Backend built with NodeJS, Mongoose & MongoDB",
+        "Real estate listing, posting, and order closing",
       ],
-      demoLink: "#",
-      githubLink: "#",
-      color: "from-amber-500 to-orange-600",
-      status: "Completed"
-    }
+      gradient: "from-teal-500 to-emerald-500",
+      shadow: "0 0 40px rgba(20, 184, 166, 0.12)",
+    },
+    {
+      title: "Digital Signature — Contract Signing",
+      period: "2023",
+      status: "Completed",
+      company: "Bravesoft Vietnam",
+      technologies: [
+        "ReactJS",
+        "Material UI",
+        "GraphQL",
+        "Konva",
+        "PostgreSQL",
+      ],
+      description:
+        "Digital contract signing platform for real estate sales with direct drawing on documents.",
+      features: [
+        "File upload and direct contract signing workflow",
+        "Konva library for drawing signatures on images/PDFs",
+        "GraphQL API integration with Sequelize ORM",
+        "Multi-party signing between buyers and sellers",
+      ],
+      gradient: "from-red-500 to-orange-500",
+      shadow: "0 0 40px rgba(239, 68, 68, 0.12)",
+    },
+    {
+      title: "CafeFinz — Web, CMS & Mobile App",
+      period: "2023",
+      status: "Completed",
+      company: "Skydev",
+      technologies: [
+        "NextJS",
+        "ReactJS",
+        "React Native",
+        "Ant Design",
+        "React Query",
+      ],
+      description:
+        "Social networking platform for cafe lovers. Web, CMS, and mobile app for community groups.",
+      features: [
+        "NextJS website with SSR for community interactions",
+        "CMS with reusable core components & SWR integration",
+        "React Native mobile app with stack navigation & TestFlight",
+        "Pixel-perfect UI implementation from Figma designs",
+      ],
+      gradient: "from-amber-500 to-orange-500",
+      shadow: "0 0 40px rgba(245, 158, 11, 0.12)",
+    },
+    {
+      title: "Virtual Event — 360° Event Platform",
+      period: "2022",
+      status: "Completed",
+      company: "Skydev",
+      technologies: [
+        "ReactJS",
+        "Ant Design",
+        "Zoom SDK",
+        "SignalR",
+        "React Query",
+      ],
+      description:
+        "360° virtual event hosting platform with Zoom integration & real-time chat.",
+      features: [
+        "360° immersive event environment",
+        "Zoom SDK integration for creating and joining meetings",
+        "SignalR real-time chat and interactive games",
+        "UI implementation from Figma with Ant Design & LESS",
+      ],
+      gradient: "from-cyan-500 to-blue-500",
+      shadow: "0 0 40px rgba(6, 182, 212, 0.12)",
+    },
+    {
+      title: "NDShop — E-commerce Platform",
+      period: "Sep 2022",
+      status: "Completed",
+      company: "Skydev",
+      technologies: ["ReactJS", "NodeJS", "MySQL"],
+      description:
+        "E-commerce website for purchasing electronics with store owner management dashboard.",
+      features: [
+        "Built frontend and backend structure from scratch",
+        "Database design and API development",
+        "Shopping experience with product listing and order management",
+        "Store owner dashboard for inventory and sales tracking",
+      ],
+      gradient: "from-pink-500 to-rose-500",
+      shadow: "0 0 40px rgba(236, 72, 153, 0.12)",
+    },
   ];
 
   return (
-    <section id="projects" className="py-24 bg-gradient-to-b from-white to-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Section Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center px-4 py-2 bg-purple-100 rounded-full text-purple-600 text-sm font-medium mb-4">
-            <ProjectOutlined className="mr-2" />
-            Portfolio
+    <>
+      <section
+        id="projects"
+        ref={sectionRef}
+        className="section bg-[#111118] relative"
+      >
+        <div className="noise-overlay" />
+        <div className="glow-orb w-[350px] h-[350px] -bottom-24 -right-24 bg-violet-500" />
+
+        <div className="section-inner">
+          {/* Header */}
+          <div className="fade-up mb-12">
+            <div className="section-label">Portfolio</div>
+            <h2 className="section-title">
+              Featured <span className="gradient-text">Projects</span>
+            </h2>
           </div>
-          <Title level={2} className="!text-4xl lg:!text-5xl !font-bold !text-slate-800 !mb-6" ellipsis={false}>
-            Featured 
-            <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Projects</span>
-          </Title>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mx-auto mb-6"></div>
-          <Paragraph className="!text-xl !text-gray-600 max-w-3xl mx-auto" ellipsis={false}>
-            A collection of projects showcasing my expertise in modern web development
-          </Paragraph>
-        </div>
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-12">
-          {projects.map((project, index) => (
-            <Card 
-              key={index} 
-              className="group h-full shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 rounded-3xl overflow-hidden"
-              bodyStyle={{ padding: 0 }}
-            >
-              {/* Project Header with Gradient */}
-              <div className={`bg-gradient-to-r ${project.color} p-8 text-white relative overflow-hidden`}>
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300"></div>
-                <div className="relative z-10">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <Title level={3} className="!text-white !mb-2 !text-xl lg:!text-2xl !font-bold" ellipsis={false}>
-                        {project.title}
-                      </Title>
-                      <div className="flex items-center text-white/80 mb-4">
-                        <CalendarOutlined className="mr-2" />
-                        <span>{project.period}</span>
-                      </div>
-                    </div>
-                    <div className={`px-3 py-1 bg-white/20 rounded-full text-xs font-semibold backdrop-blur-sm ${
-                      project.status === 'Current' ? 'animate-pulse' : ''
-                    }`}>
-                      {project.status}
+          {/* Projects Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {projects.map((project, index) => (
+              <div
+                key={index}
+                className={`fade-up stagger-${index + 1} glass-card !p-0 overflow-hidden group flex flex-col`}
+                style={
+                  { "--hover-shadow": project.shadow } as React.CSSProperties
+                }
+              >
+                {/* Gradient Header */}
+                <div
+                  className={`bg-gradient-to-r ${project.gradient} px-6 py-5 flex items-start justify-between gap-3 relative overflow-hidden`}
+                >
+                  {/* Shimmer effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                  <div className="relative z-10 flex-1">
+                    <h3 className="text-[17px] font-bold text-white mb-1.5 leading-snug">
+                      {project.title}
+                    </h3>
+                    <div className="flex items-center gap-3 flex-wrap text-white/70 text-[13px]">
+                      <span className="flex items-center gap-1.5">
+                        <CalendarOutlined />
+                        {project.period}
+                      </span>
+                      {project.company && (
+                        <span className="px-2 py-0.5 bg-white/15 rounded text-white/80 text-[11px] font-medium">
+                          {project.company}
+                        </span>
+                      )}
                     </div>
                   </div>
-                  
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech, techIndex) => (
-                      <Tag key={techIndex} className="border-white/30 text-white bg-white/20 backdrop-blur-sm">
-                        {tech}
-                      </Tag>
-                    ))}
-                  </div>
+                  {project.status === "Current" && (
+                    <span className="relative z-10 px-2.5 py-0.5 bg-white/20 rounded-full text-white text-[11px] font-semibold shrink-0 backdrop-blur-sm">
+                      Active
+                    </span>
+                  )}
                 </div>
-              </div>
 
-              {/* Project Content */}
-              <div className="p-8">
-                <Paragraph className="!text-gray-700 !text-base !leading-relaxed !mb-6" ellipsis={false}>
-                  {project.description}
-                </Paragraph>
-                
-                {/* Features */}
-                <div className="mb-8">
-                  <Title level={5} className="!text-gray-800 !mb-4 flex items-center" ellipsis={false}>
-                    <ToolOutlined className="mr-2 text-blue-500" />
-                    Key Features
-                  </Title>
-                  <div className="space-y-3">
-                    {project.features.slice(0, 3).map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-start">
-                        <CheckCircleOutlined className="text-green-500 mt-1 mr-3 flex-shrink-0" />
-                        <span className="text-gray-600 text-sm leading-relaxed">{feature}</span>
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-1">
+                  <p className="text-sm text-[#8b8b9e] leading-relaxed mb-4">
+                    {project.description}
+                  </p>
+
+                  <div className="mb-5">
+                    {project.features.map((feature, i) => (
+                      <div
+                        key={i}
+                        className="flex items-start gap-2.5 mb-2.5 group/item"
+                      >
+                        <span className="w-[5px] h-[5px] rounded-full bg-blue-500 mt-[7px] shrink-0 group-hover/item:bg-blue-400 transition-colors" />
+                        <span className="text-[13px] text-[#8b8b9e] leading-relaxed group-hover/item:text-[#b0b0c0] transition-colors">
+                          {feature}
+                        </span>
                       </div>
                     ))}
-                    {project.features.length > 3 && (
-                      <div className="text-sm text-gray-500 pl-6">
-                        +{project.features.length - 3} more features
-                      </div>
+                  </div>
+
+                  <div className="mt-auto">
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.technologies.map((tech, i) => (
+                        <span
+                          key={i}
+                          className="px-2.5 py-1 bg-white/[0.03] border border-white/[0.06] rounded-md text-xs text-[#5a5a6e] font-medium hover:border-white/[0.12] hover:text-[#8b8b9e] transition-all duration-200"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {project.demoUrl && (
+                      <button
+                        onClick={() => {
+                          const id =
+                            project.demoUrl!.match(/\/d\/(.+?)\//)?.[1];
+                          if (id)
+                            setActiveVideo(
+                              `https://drive.google.com/file/d/${id}/preview`,
+                            );
+                        }}
+                        className={`mt-4 inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${project.gradient} rounded-lg text-white text-sm font-semibold hover:opacity-90 transition-opacity duration-200 cursor-pointer border-none`}
+                      >
+                        <span>▶</span>
+                        Watch Demo
+                      </button>
                     )}
                   </div>
                 </div>
-
-                {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button 
-                    type="primary"
-                    icon={<EyeOutlined />}
-                    href={project.demoLink}
-                    target="_blank"
-                    className={`bg-gradient-to-r ${project.color} border-none hover:opacity-90 font-semibold px-4 sm:px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex-1`}
-                  >
-                    <span className="hidden sm:inline">Live Demo</span>
-                    <span className="sm:hidden">Demo</span>
-                  </Button>
-                  <Button 
-                    icon={<GithubOutlined />}
-                    href={project.githubLink}
-                    target="_blank"
-                    className="bg-gray-800 text-white border-none hover:bg-gray-700 font-semibold px-4 sm:px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex-1"
-                  >
-                    Source
-                  </Button>
-                </div>
               </div>
-            </Card>
-          ))}
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* CTA Section */}
-        <Card className="bg-white rounded-3xl p-12 text-center border-0 shadow-2xl hover:shadow-3xl transition-shadow duration-300">
-          <Title level={3} className="!text-gray-800 !text-3xl lg:!text-4xl !mb-4 !font-bold" ellipsis={false}>
-            Interested in My Work?
-          </Title>
-          <Paragraph className="!text-gray-600 !text-xl !mb-8 max-w-2xl mx-auto !leading-relaxed" ellipsis={false}>
-            Let's discuss how I can help bring your next project to life with modern technologies and innovative solutions.
-          </Paragraph>
-          <Space size="large" wrap className="justify-center">
-            <Button 
-              size="large"
-              className="bg-gradient-to-r from-purple-500 to-blue-600 text-white px-6 sm:px-8 py-4 sm:py-6 h-auto text-base sm:text-lg rounded-2xl font-bold hover:from-purple-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 border-none"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+      {/* Video Modal */}
+      {activeVideo && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          onClick={() => setActiveVideo(null)}
+        >
+          <div
+            className="relative w-[90vw] max-w-4xl aspect-video rounded-2xl overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <iframe
+              src={activeVideo}
+              className="w-full h-full border-none"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            />
+            <button
+              onClick={() => setActiveVideo(null)}
+              className="absolute top-3 right-3 w-9 h-9 bg-black/60 hover:bg-black/80 text-white rounded-full flex items-center justify-center text-lg cursor-pointer border-none transition-colors"
             >
-              Get In Touch
-            </Button>
-            <Button 
-              size="large"
-              className="bg-gray-100 border-2 border-gray-300 text-gray-700 px-6 sm:px-8 py-4 sm:py-6 h-auto text-base sm:text-lg rounded-2xl font-bold hover:bg-gray-200 hover:border-gray-400 transition-all duration-300 transform hover:-translate-y-1"
-              onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              View Experience
-            </Button>
-          </Space>
-        </Card>
-        
-      </div>
-    </section>
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

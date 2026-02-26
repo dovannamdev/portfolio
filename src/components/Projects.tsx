@@ -1,26 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
+import { motion } from "motion/react";
 import { AiOutlineCalendar } from "react-icons/ai";
+import { presets, viewport } from "../utils/motion";
 
 const Projects: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".fade-up").forEach((el) => {
-              el.classList.add("visible");
-            });
-          }
-        });
-      },
-      { threshold: 0.08 },
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   const projects = [
     {
@@ -227,7 +211,6 @@ const Projects: React.FC = () => {
     <>
       <section
         id="projects"
-        ref={sectionRef}
         className="section bg-[#111118] relative"
       >
         <div className="noise-overlay" />
@@ -235,19 +218,35 @@ const Projects: React.FC = () => {
 
         <div className="section-inner">
           {/* Header */}
-          <div className="fade-up mb-12">
+          <motion.div {...presets.scalePop()} viewport={viewport} className="mb-12">
             <div className="section-label">Portfolio</div>
             <h2 className="section-title">
               Featured <span className="gradient-text">Projects</span>
             </h2>
-          </div>
+          </motion.div>
 
           {/* Projects Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {projects.map((project, index) => (
-              <div
+            {projects.map((project, index) => {
+              const animations = [
+                presets.fadeUp,
+                presets.slideLeft,
+                presets.rotateX,
+                presets.scalePop,
+                presets.slideRight,
+                presets.rotateY,
+                presets.blurIn,
+                presets.springUp,
+                presets.springPop,
+              ];
+              const anim = animations[index % animations.length]((index % 2) * 0.1);
+              return (
+              <motion.div
                 key={index}
-                className={`fade-up stagger-${index + 1} glass-card !p-0 overflow-hidden group flex flex-col`}
+                {...anim}
+                viewport={{ once: true, margin: "-30px" }}
+                whileHover={{ y: -6, scale: 1.01 }}
+                className="glass-card !p-0 overflow-hidden group flex flex-col"
                 style={
                   { "--hover-shadow": project.shadow } as React.CSSProperties
                 }
@@ -256,7 +255,6 @@ const Projects: React.FC = () => {
                 <div
                   className={`bg-gradient-to-r ${project.gradient} px-6 py-5 flex items-start justify-between gap-3 relative overflow-hidden`}
                 >
-                  {/* Shimmer effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                   <div className="relative z-10 flex-1">
                     <h3 className="text-[17px] font-bold text-white mb-1.5 leading-snug">
@@ -331,8 +329,9 @@ const Projects: React.FC = () => {
                     )}
                   </div>
                 </div>
-              </div>
-            ))}
+              </motion.div>
+            )})}
+
           </div>
         </div>
       </section>
@@ -343,7 +342,10 @@ const Projects: React.FC = () => {
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
           onClick={() => setActiveVideo(null)}
         >
-          <div
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
             className="relative w-[90vw] max-w-4xl aspect-video rounded-2xl overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
@@ -359,7 +361,7 @@ const Projects: React.FC = () => {
             >
               ✕
             </button>
-          </div>
+          </motion.div>
         </div>
       )}
     </>

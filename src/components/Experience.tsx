@@ -1,31 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
+import { motion } from "motion/react";
 import {
   AiOutlineThunderbolt,
   AiOutlineUser,
   AiOutlineCalendar,
   AiOutlineEnvironment,
 } from "react-icons/ai";
+import { presets, viewport } from "../utils/motion";
 
 const Experience: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".fade-up").forEach((el) => {
-              el.classList.add("visible");
-            });
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   const experiences = [
     {
       title: "Fullstack Developer",
@@ -39,16 +22,7 @@ const Experience: React.FC = () => {
         "Integrated IoT devices (SwitchBot) with scheduled sync and batch processing",
         "Built AI-powered transcription system using OpenAI Whisper with SSE streaming",
       ],
-      technologies: [
-        "React",
-        "TypeScript",
-        "NestJS",
-        "PostgreSQL",
-        "TimescaleDB",
-        "Redis",
-        "Stripe",
-        "OpenAI",
-      ],
+      technologies: ["React", "NextJS", "TypeScript", "NestJS", "PostgreSQL", "TimescaleDB", "Redis", "Stripe", "OpenAI"],
       icon: <AiOutlineThunderbolt className="text-white text-base" />,
       gradient: "from-blue-500 to-violet-500",
       shadow: "shadow-blue-500/25",
@@ -63,7 +37,7 @@ const Experience: React.FC = () => {
         "Implemented modern UI components and design systems",
         "Collaborated with backend teams on API integration",
       ],
-      technologies: ["React.js", "JavaScript", "HTML", "CSS"],
+      technologies: ["React.js", "NextJS", "JavaScript", "HTML", "CSS"],
       icon: <AiOutlineUser className="text-white text-base" />,
       gradient: "from-emerald-500 to-cyan-500",
       shadow: "shadow-emerald-500/25",
@@ -71,57 +45,49 @@ const Experience: React.FC = () => {
   ];
 
   return (
-    <section
-      id="experience"
-      ref={sectionRef}
-      className="section bg-[#0a0a0f] relative"
-    >
+    <section id="experience" className="section bg-[#0a0a0f] relative">
       <div className="noise-overlay" />
-      {/* Subtle glow */}
       <div className="glow-orb w-[400px] h-[400px] -top-48 -left-32 bg-blue-500" />
 
       <div className="section-inner">
-        {/* Header */}
-        <div className="fade-up mb-12">
+        <motion.div {...presets.blurIn()} viewport={viewport} className="mb-12">
           <div className="section-label">Career</div>
           <h2 className="section-title">
             Work <span className="gradient-text">Experience</span>
           </h2>
-        </div>
+        </motion.div>
 
-        {/* Timeline */}
         <div className="relative pl-14">
           <div className="timeline-line" />
 
           {experiences.map((exp, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`fade-up stagger-${index + 1} relative ${index < experiences.length - 1 ? "mb-12" : ""}`}
+              {...presets.slideLeft(index * 0.15)}
+              viewport={viewport}
+              className={`relative ${index < experiences.length - 1 ? "mb-12" : ""}`}
             >
-              {/* Timeline Dot */}
-              <div
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 15, delay: index * 0.15 }}
+                viewport={{ once: true }}
                 className={`timeline-dot absolute -left-14 top-0 bg-gradient-to-br ${exp.gradient} ${exp.shadow} shadow-lg`}
               >
                 {exp.icon}
-              </div>
+              </motion.div>
 
-              {/* Card */}
               <div className="glass-card gradient-border !p-0 overflow-hidden">
-                {/* Header */}
                 <div className="px-7 py-6 border-b border-white/[0.06]">
                   <div className="flex items-start justify-between flex-wrap gap-3">
                     <div>
-                      <h3 className="text-xl font-bold text-[#f0f0f5] mb-1">
-                        {exp.title}
-                      </h3>
+                      <h3 className="text-xl font-bold text-[#f0f0f5] mb-1">{exp.title}</h3>
                       <div className="flex items-center gap-4 flex-wrap">
                         <span className="flex items-center gap-1.5 text-[#8b8b9e] text-sm">
-                          <AiOutlineEnvironment />
-                          {exp.company}
+                          <AiOutlineEnvironment />{exp.company}
                         </span>
                         <span className="flex items-center gap-1.5 text-[#5a5a6e] text-sm">
-                          <AiOutlineCalendar />
-                          {exp.period}
+                          <AiOutlineCalendar />{exp.period}
                         </span>
                       </div>
                     </div>
@@ -133,32 +99,25 @@ const Experience: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Content */}
                 <div className="px-7 py-6">
                   <div className="mb-5">
-                    {exp.achievements.map((achievement, i) => (
-                      <div
-                        key={i}
-                        className="flex items-start gap-3 mb-3 group"
-                      >
+                    {exp.achievements.map((a, i) => (
+                      <div key={i} className="flex items-start gap-3 mb-3 group">
                         <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0 group-hover:scale-150 transition-transform duration-200" />
                         <span className="text-[15px] text-[#8b8b9e] leading-relaxed group-hover:text-[#b0b0c0] transition-colors duration-200">
-                          {achievement}
+                          {a}
                         </span>
                       </div>
                     ))}
                   </div>
-
                   <div className="flex flex-wrap gap-2">
                     {exp.technologies.map((tech, i) => (
-                      <span key={i} className="skill-tag">
-                        {tech}
-                      </span>
+                      <span key={i} className="skill-tag">{tech}</span>
                     ))}
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "motion/react";
 import {
   AiOutlineGithub,
   AiOutlineLinkedin,
@@ -30,7 +31,13 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-[#0a0a0f] border-t border-white/[0.06] py-8 px-6">
+    <motion.footer
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="bg-[#0a0a0f] border-t border-white/[0.06] py-8 px-6"
+    >
       <div className="max-w-[1100px] mx-auto flex items-center justify-between flex-wrap gap-4">
         {/* Copyright */}
         <div className="text-sm text-[#5a5a6e]">
@@ -40,29 +47,37 @@ const Footer: React.FC = () => {
         {/* Social Links */}
         <div className="flex items-center gap-2">
           {socialLinks.map((link, index) => (
-            <a
+            <motion.a
               key={index}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -2, scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
               href={link.href}
               target={link.href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
               title={link.label}
-              className="w-9 h-9 flex items-center justify-center rounded-lg border border-white/[0.06] text-[#5a5a6e] text-base no-underline hover:text-blue-400 hover:border-blue-500/30 hover:bg-blue-500/[0.06] hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
+              className="w-9 h-9 flex items-center justify-center rounded-lg border border-white/[0.06] text-[#5a5a6e] text-base no-underline hover:text-blue-400 hover:border-blue-500/30 hover:bg-blue-500/[0.06] hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300"
             >
               {link.icon}
-            </a>
+            </motion.a>
           ))}
         </div>
 
         {/* Back to Top */}
-        <button
+        <motion.button
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.95 }}
           onClick={scrollToTop}
-          className="flex items-center gap-1.5 px-4 py-2 bg-white/[0.03] border border-white/[0.06] rounded-lg text-[#5a5a6e] text-[13px] font-medium cursor-pointer hover:border-white/[0.12] hover:text-[#f0f0f5] hover:bg-white/[0.06] hover:-translate-y-0.5 transition-all duration-300 font-[inherit]"
+          className="flex items-center gap-1.5 px-4 py-2 bg-white/[0.03] border border-white/[0.06] rounded-lg text-[#5a5a6e] text-[13px] font-medium cursor-pointer hover:border-white/[0.12] hover:text-[#f0f0f5] hover:bg-white/[0.06] transition-all duration-300 font-[inherit]"
         >
-           <AiOutlineArrowUp />
+          <AiOutlineArrowUp />
           Top
-        </button>
+        </motion.button>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 

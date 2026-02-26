@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import {
-  MailOutlined,
-  PhoneOutlined,
-  GithubOutlined,
-  LinkedinOutlined,
-  GlobalOutlined,
-} from "@ant-design/icons";
+  AiOutlineMail,
+  AiOutlinePhone,
+  AiOutlineGithub,
+  AiOutlineLinkedin,
+  AiOutlineGlobal,
+} from "react-icons/ai";
 
 const Contact: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -29,35 +29,35 @@ const Contact: React.FC = () => {
 
   const contactItems = [
     {
-      icon: <MailOutlined className="text-xl" />,
+      icon: <AiOutlineMail className="text-xl" />,
       label: "Email",
       value: "dovannam.dev@gmail.com",
       href: "mailto:dovannam.dev@gmail.com",
       gradient: "from-blue-500 to-cyan-500",
     },
     {
-      icon: <PhoneOutlined className="text-xl" />,
+      icon: <AiOutlinePhone className="text-xl" />,
       label: "Phone",
       value: "0343 181 781",
       href: "tel:0343181781",
       gradient: "from-emerald-500 to-cyan-500",
     },
     {
-      icon: <GithubOutlined className="text-xl" />,
+      icon: <AiOutlineGithub className="text-xl" />,
       label: "GitHub",
       value: "github.com/dovannamdev",
       href: "https://github.com/dovannamdev",
       gradient: "from-violet-500 to-pink-500",
     },
     {
-      icon: <LinkedinOutlined className="text-xl" />,
+      icon: <AiOutlineLinkedin className="text-xl" />,
       label: "LinkedIn",
       value: "linkedin.com/in/do-nam-5a7a25231",
       href: "https://www.linkedin.com/in/do-nam-5a7a25231/",
       gradient: "from-blue-500 to-violet-500",
     },
     {
-      icon: <GlobalOutlined className="text-xl" />,
+      icon: <AiOutlineGlobal className="text-xl" />,
       label: "Location",
       value: "Ho Chi Minh, Viet Nam",
       href: undefined,

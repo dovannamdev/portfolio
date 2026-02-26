@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { CalendarOutlined } from "@ant-design/icons";
+import { AiOutlineCalendar } from "react-icons/ai";
 
 const Projects: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -264,7 +264,7 @@ const Projects: React.FC = () => {
                     </h3>
                     <div className="flex items-center gap-3 flex-wrap text-white/70 text-[13px]">
                       <span className="flex items-center gap-1.5">
-                        <CalendarOutlined />
+                        <AiOutlineCalendar />
                         {project.period}
                       </span>
                       {project.company && (

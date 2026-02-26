@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { DownloadOutlined, MailOutlined } from "@ant-design/icons";
+import { AiOutlineDownload, AiOutlineMail } from "react-icons/ai";
 
 const Hero: React.FC = () => {
   const [loaded, setLoaded] = useState(false);
@@ -120,7 +120,7 @@ const Hero: React.FC = () => {
                 ?.scrollIntoView({ behavior: "smooth" })
             }
           >
-            <MailOutlined />
+            <AiOutlineMail />
             Get In Touch
           </button>
           <a
@@ -128,7 +128,7 @@ const Hero: React.FC = () => {
             href="https://drive.google.com/uc?export=download&id=1kZoDwkrc4qzdhxB96B-tn9AwlZ5EUdrY"
             download="Do_Van_Nam_-_Full-Stack_Developer.pdf"
           >
-            <DownloadOutlined />
+            <AiOutlineDownload />
             Download CV
           </a>
         </div>

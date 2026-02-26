@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import {
-  CodeOutlined,
-  DatabaseOutlined,
-  CloudOutlined,
-  LayoutOutlined,
-} from "@ant-design/icons";
+  AiOutlineCode,
+  AiOutlineDatabase,
+  AiOutlineCloud,
+  AiOutlineLayout,
+} from "react-icons/ai";
 
 const Skills: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -29,7 +29,7 @@ const Skills: React.FC = () => {
   const categories = [
     {
       title: "Frontend",
-      icon: <LayoutOutlined className="text-white text-lg" />,
+      icon: <AiOutlineLayout className="text-white text-lg" />,
       gradient: "from-blue-500 to-cyan-500",
       shadow: "shadow-blue-500/20",
       skills: [
@@ -45,7 +45,7 @@ const Skills: React.FC = () => {
     },
     {
       title: "Backend",
-      icon: <CodeOutlined className="text-white text-lg" />,
+      icon: <AiOutlineCode className="text-white text-lg" />,
       gradient: "from-emerald-500 to-cyan-500",
       shadow: "shadow-emerald-500/20",
       skills: [
@@ -58,7 +58,7 @@ const Skills: React.FC = () => {
     },
     {
       title: "Database",
-      icon: <DatabaseOutlined className="text-white text-lg" />,
+      icon: <AiOutlineDatabase className="text-white text-lg" />,
       gradient: "from-violet-500 to-pink-500",
       shadow: "shadow-violet-500/20",
       skills: [
@@ -71,7 +71,7 @@ const Skills: React.FC = () => {
     },
     {
       title: "Infra & Services",
-      icon: <CloudOutlined className="text-white text-lg" />,
+      icon: <AiOutlineCloud className="text-white text-lg" />,
       gradient: "from-amber-500 to-red-500",
       shadow: "shadow-amber-500/20",
       skills: [

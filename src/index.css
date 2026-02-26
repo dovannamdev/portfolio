@@ -387,13 +387,6 @@ html {
   opacity: 1;
 }
 
-/* ===== Ant Design Overrides ===== */
-.ant-layout-header {
-  height: auto !important;
-  line-height: normal !important;
-  padding: 0 !important;
-}
-
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .section { padding: 64px 0; }

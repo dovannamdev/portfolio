@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { BookOutlined } from "@ant-design/icons";
+import { AiOutlineBook } from "react-icons/ai";
 
 const useScrollReveal = (ref: React.RefObject<HTMLElement | null>) => {
   useEffect(() => {
@@ -60,7 +60,7 @@ const About: React.FC = () => {
         {/* Education */}
         <div className="fade-up stagger-2 glass-card gradient-border p-6">
           <h3 className="text-lg font-bold text-[#f0f0f5] mb-4 flex items-center gap-2">
-            <BookOutlined className="text-blue-400" />
+            <AiOutlineBook className="text-blue-400" />
             Education
           </h3>
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import {
-  ThunderboltOutlined,
-  UserOutlined,
-  CalendarOutlined,
-  EnvironmentOutlined,
-} from "@ant-design/icons";
+  AiOutlineThunderbolt,
+  AiOutlineUser,
+  AiOutlineCalendar,
+  AiOutlineEnvironment,
+} from "react-icons/ai";
 
 const Experience: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -49,7 +49,7 @@ const Experience: React.FC = () => {
         "Stripe",
         "OpenAI",
       ],
-      icon: <ThunderboltOutlined className="text-white text-base" />,
+      icon: <AiOutlineThunderbolt className="text-white text-base" />,
       gradient: "from-blue-500 to-violet-500",
       shadow: "shadow-blue-500/25",
     },
@@ -64,7 +64,7 @@ const Experience: React.FC = () => {
         "Collaborated with backend teams on API integration",
       ],
       technologies: ["React.js", "JavaScript", "HTML", "CSS"],
-      icon: <UserOutlined className="text-white text-base" />,
+      icon: <AiOutlineUser className="text-white text-base" />,
       gradient: "from-emerald-500 to-cyan-500",
       shadow: "shadow-emerald-500/25",
     },
@@ -116,11 +116,11 @@ const Experience: React.FC = () => {
                       </h3>
                       <div className="flex items-center gap-4 flex-wrap">
                         <span className="flex items-center gap-1.5 text-[#8b8b9e] text-sm">
-                          <EnvironmentOutlined />
+                          <AiOutlineEnvironment />
                           {exp.company}
                         </span>
                         <span className="flex items-center gap-1.5 text-[#5a5a6e] text-sm">
-                          <CalendarOutlined />
+                          <AiOutlineCalendar />
                           {exp.period}
                         </span>
                       </div>

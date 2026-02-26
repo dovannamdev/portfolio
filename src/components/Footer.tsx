@@ -1,10 +1,10 @@
 import React from "react";
 import {
-  GithubOutlined,
-  LinkedinOutlined,
-  MailOutlined,
-  ArrowUpOutlined,
-} from "@ant-design/icons";
+  AiOutlineGithub,
+  AiOutlineLinkedin,
+  AiOutlineMail,
+  AiOutlineArrowUp,
+} from "react-icons/ai";
 
 const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -13,17 +13,17 @@ const Footer: React.FC = () => {
 
   const socialLinks = [
     {
-      icon: <GithubOutlined />,
+      icon: <AiOutlineGithub />,
       href: "https://github.com/dovannamdev",
       label: "GitHub",
     },
     {
-      icon: <LinkedinOutlined />,
+      icon: <AiOutlineLinkedin />,
       href: "https://www.linkedin.com/in/do-nam-5a7a25231/",
       label: "LinkedIn",
     },
     {
-      icon: <MailOutlined />,
+      icon: <AiOutlineMail />,
       href: "mailto:dovannam.dev@gmail.com",
       label: "Email",
     },
@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
           onClick={scrollToTop}
           className="flex items-center gap-1.5 px-4 py-2 bg-white/[0.03] border border-white/[0.06] rounded-lg text-[#5a5a6e] text-[13px] font-medium cursor-pointer hover:border-white/[0.12] hover:text-[#f0f0f5] hover:bg-white/[0.06] hover:-translate-y-0.5 transition-all duration-300 font-[inherit]"
         >
-          <ArrowUpOutlined />
+           <AiOutlineArrowUp />
           Top
         </button>
       </div>

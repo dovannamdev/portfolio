@@ -1,4 +1,4 @@
-import { ConfigProvider } from "antd";
+import { IconContext } from "react-icons";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -10,18 +10,7 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: "#3b82f6",
-          borderRadius: 12,
-          fontFamily:
-            "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-          colorBgBase: "#0a0a0f",
-          colorTextBase: "#f0f0f5",
-        },
-      }}
-    >
+    <IconContext.Provider value={{ size: "1.2em" }}>
       <div style={{ background: "#0a0a0f", minHeight: "100vh" }}>
         <Header />
         <Hero />
@@ -32,8 +21,9 @@ function App() {
         <Contact />
         <Footer />
       </div>
-    </ConfigProvider>
+    </IconContext.Provider>
   );
 }
 
 export default App;
+

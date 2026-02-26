@@ -125,7 +125,7 @@ const Hero: React.FC = () => {
           </button>
           <a
             className="btn-secondary"
-            href="https://drive.google.com/uc?export=download&id=142QFt94TXSMgcrvXzz_ywlMpITb_92D0"
+            href="https://drive.google.com/uc?export=download&id=1kZoDwkrc4qzdhxB96B-tn9AwlZ5EUdrY"
             download="Do_Van_Nam_-_Full-Stack_Developer.pdf"
           >
             <DownloadOutlined />

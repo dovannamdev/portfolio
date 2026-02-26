@@ -50,21 +50,21 @@ This project includes GitHub Actions workflows for continuous integration and de
 - Automatically deploys to GitHub Pages on push to `main`/`master` branch
 - Can also be triggered manually via workflow_dispatch
 
-### Setup GitHub Pages để có Public Website
+### Setting Up GitHub Pages for a Public Website
 
-**📖 Xem hướng dẫn chi tiết tại [DEPLOYMENT.md](./DEPLOYMENT.md)**
+**📖 See the detailed guide at [DEPLOYMENT.md](./DEPLOYMENT.md)**
 
-**Tóm tắt các bước:**
+**Summary of steps:**
 
-1. **Push code lên GitHub** (nếu chưa có repository)
-2. **Cập nhật base path** trong `vite.config.ts` nếu tên repo khác `portfolio`
+1. **Push code to GitHub** (if you don't have a repository yet)
+2. **Update the base path** in `vite.config.ts` if your repo name differs from `portfolio`
 3. **Enable GitHub Pages**: 
-   - Vào Settings → Pages
-   - Chọn "GitHub Actions" làm source
-4. **Push code** lên branch `main` hoặc `master`
-5. **Chờ deploy** (2-5 phút) và truy cập: `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/`
+   - Go to Settings → Pages
+   - Select "GitHub Actions" as the source
+4. **Push code** to the `main` or `master` branch
+5. **Wait for deployment** (2-5 minutes) and visit: `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/`
 
-**⚠️ QUAN TRỌNG:** Nếu repository name khác `portfolio`, bạn **PHẢI** cập nhật `base` path trong `vite.config.ts`:
+**⚠️ IMPORTANT:** If your repository name differs from `portfolio`, you **MUST** update the `base` path in `vite.config.ts`:
 ```typescript
 base: process.env.GITHUB_PAGES === 'true' ? '/YOUR_REPO_NAME/' : '/',
 ```

@@ -12,16 +12,8 @@ const Projects: React.FC = () => {
       period: "Nov 2025 — Present",
       status: "Current",
       company: "Bravesoft Vietnam",
-      technologies: [
-        "React",
-        "NestJS",
-        "PostgreSQL",
-        "TimescaleDB",
-        "Redis",
-        "Stripe",
-      ],
-      description:
-        "IoT platform for tracking sensor data from SwitchBot devices with subscription billing.",
+      technologies: ["React", "NestJS", "PostgreSQL", "TimescaleDB", "Redis", "Stripe"],
+      description: "IoT platform for tracking sensor data from SwitchBot devices with subscription billing.",
       features: [
         "Team lead for 4-member team with PM coordination",
         "Integrated SwitchBot IoT devices with scheduled sync, rate limiting & batch processing",
@@ -31,25 +23,15 @@ const Projects: React.FC = () => {
       ],
       gradient: "from-emerald-500 to-cyan-500",
       shadow: "0 0 40px rgba(16, 185, 129, 0.12)",
-      demoUrl:
-        "https://drive.google.com/file/d/1nXUqHYIvYoKykcLCtM35XCuvcBeGwybm/view",
+      demoUrl: "https://drive.google.com/file/d/1nXUqHYIvYoKykcLCtM35XCuvcBeGwybm/view",
     },
     {
       title: "JIM3 — AI Transcription SaaS",
       period: "Aug 2025 — Present",
       status: "Current",
       company: "Bravesoft Vietnam",
-      technologies: [
-        "React",
-        "NestJS",
-        "OpenAI Whisper",
-        "SSE",
-        "Stripe",
-        "Redis",
-        "MySQL",
-      ],
-      description:
-        "AI-powered transcription platform using OpenAI Whisper with real-time streaming.",
+      technologies: ["React", "NestJS", "OpenAI Whisper", "SSE", "Stripe", "Redis", "MySQL"],
+      description: "AI-powered transcription platform using OpenAI Whisper with real-time streaming.",
       features: [
         "AI transcription system with OpenAI Whisper API for audio uploads",
         "SSE streaming for real-time progress with reconnection handling",
@@ -58,23 +40,15 @@ const Projects: React.FC = () => {
       ],
       gradient: "from-blue-500 to-violet-500",
       shadow: "0 0 40px rgba(59, 130, 246, 0.12)",
-      demoUrl:
-        "https://drive.google.com/file/d/1xTW7kXQBMvBagRigcVbQdQlbI0xKPN7w/view",
+      demoUrl: "https://drive.google.com/file/d/1xTW7kXQBMvBagRigcVbQdQlbI0xKPN7w/view",
     },
     {
       title: "Premium Chat — Real Estate Platform",
       period: "2024",
       status: "Completed",
       company: "Bravesoft Vietnam",
-      technologies: [
-        "NextJS",
-        "Material UI",
-        "GraphQL",
-        "PostgreSQL",
-        "Sequelize",
-      ],
-      description:
-        "Real estate platform connecting sellers and buyers with real-time chat communication.",
+      technologies: ["NextJS", "Material UI", "GraphQL", "PostgreSQL", "Sequelize"],
+      description: "Real estate platform connecting sellers and buyers with real-time chat communication.",
       features: [
         "UI implementation with Material UI & SCSS",
         "GraphQL API integration for data fetching",
@@ -90,8 +64,7 @@ const Projects: React.FC = () => {
       status: "Completed",
       company: "Bravesoft Vietnam",
       technologies: ["Node.js", "PostgreSQL", "Redis", "Docker"],
-      description:
-        "Automated web scraping system crawling from SUUMO, HOME's, Yahoo and other Japanese property platforms to aggregate and match real estate listings.",
+      description: "Automated web scraping system crawling from SUUMO, HOME's, Yahoo and other Japanese property platforms to aggregate and match real estate listings.",
       features: [
         "Built crawling pipelines to scrape data from SUUMO, HOME's, Yahoo real estate",
         "Implemented a matching feature to track and watch new listings in real-time",
@@ -108,8 +81,7 @@ const Projects: React.FC = () => {
       status: "Completed",
       company: "Bravesoft Vietnam",
       technologies: ["NextJS", "NodeJS", "MongoDB", "Mongoose", "Material UI"],
-      description:
-        "Real estate introduction and listing website with sales posting and order management.",
+      description: "Real estate introduction and listing website with sales posting and order management.",
       features: [
         "NextJS SSR website with Material UI",
         "API integration with Axios & React Query",
@@ -124,15 +96,8 @@ const Projects: React.FC = () => {
       period: "2023",
       status: "Completed",
       company: "Bravesoft Vietnam",
-      technologies: [
-        "ReactJS",
-        "Material UI",
-        "GraphQL",
-        "Konva",
-        "PostgreSQL",
-      ],
-      description:
-        "Digital contract signing platform for real estate sales with direct drawing on documents.",
+      technologies: ["ReactJS", "Material UI", "GraphQL", "Konva", "PostgreSQL"],
+      description: "Digital contract signing platform for real estate sales with direct drawing on documents.",
       features: [
         "File upload and direct contract signing workflow",
         "Konva library for drawing signatures on images/PDFs",
@@ -147,15 +112,8 @@ const Projects: React.FC = () => {
       period: "2023",
       status: "Completed",
       company: "Skydev",
-      technologies: [
-        "NextJS",
-        "ReactJS",
-        "React Native",
-        "Ant Design",
-        "React Query",
-      ],
-      description:
-        "Social networking platform for cafe lovers. Web, CMS, and mobile app for community groups.",
+      technologies: ["NextJS", "ReactJS", "React Native", "Ant Design", "React Query"],
+      description: "Social networking platform for cafe lovers. Web, CMS, and mobile app for community groups.",
       features: [
         "NextJS website with SSR for community interactions",
         "CMS with reusable core components & SWR integration",
@@ -170,15 +128,8 @@ const Projects: React.FC = () => {
       period: "2022",
       status: "Completed",
       company: "Skydev",
-      technologies: [
-        "ReactJS",
-        "Ant Design",
-        "Zoom SDK",
-        "SignalR",
-        "React Query",
-      ],
-      description:
-        "360° virtual event hosting platform with Zoom integration & real-time chat.",
+      technologies: ["ReactJS", "Ant Design", "Zoom SDK", "SignalR", "React Query"],
+      description: "360° virtual event hosting platform with Zoom integration & real-time chat.",
       features: [
         "360° immersive event environment",
         "Zoom SDK integration for creating and joining meetings",
@@ -194,8 +145,7 @@ const Projects: React.FC = () => {
       status: "Completed",
       company: "Skydev",
       technologies: ["ReactJS", "NodeJS", "MySQL"],
-      description:
-        "E-commerce website for purchasing electronics with store owner management dashboard.",
+      description: "E-commerce website for purchasing electronics with store owner management dashboard.",
       features: [
         "Built frontend and backend structure from scratch",
         "Database design and API development",
@@ -209,47 +159,38 @@ const Projects: React.FC = () => {
 
   return (
     <>
-      <section
-        id="projects"
-        className="section bg-[#111118] relative"
-      >
+      <section id="projects" className="section bg-[#111118] relative">
         <div className="noise-overlay" />
         <div className="glow-orb w-[350px] h-[350px] -bottom-24 -right-24 bg-violet-500" />
 
         <div className="section-inner">
           {/* Header */}
-          <motion.div {...presets.scalePop()} viewport={viewport} className="mb-12">
+          <motion.div
+            {...presets.scalePop()}
+            whileInView={presets.scalePop().animate}
+            viewport={viewport}
+            className="mb-12"
+            style={{ willChange: "transform, opacity" }}
+          >
             <div className="section-label">Portfolio</div>
             <h2 className="section-title">
               Featured <span className="gradient-text">Projects</span>
             </h2>
           </motion.div>
 
-          {/* Projects Grid */}
+          {/* Projects Grid — ⚡ Unified animation preset for all cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {projects.map((project, index) => {
-              const animations = [
-                presets.fadeUp,
-                presets.slideLeft,
-                presets.rotateX,
-                presets.scalePop,
-                presets.slideRight,
-                presets.rotateY,
-                presets.blurIn,
-                presets.springUp,
-                presets.springPop,
-              ];
-              const anim = animations[index % animations.length]((index % 2) * 0.1);
-              return (
+            {projects.map((project, index) => (
               <motion.div
                 key={index}
-                {...anim}
+                {...presets.fadeUp(index * 0.06)}
+                whileInView={presets.fadeUp(index * 0.06).animate}
                 viewport={{ once: true, margin: "-30px" }}
-                whileHover={{ y: -6, scale: 1.01 }}
                 className="glass-card !p-0 overflow-hidden group flex flex-col"
-                style={
-                  { "--hover-shadow": project.shadow } as React.CSSProperties
-                }
+                style={{
+                  willChange: "transform, opacity",
+                  "--hover-shadow": project.shadow,
+                } as React.CSSProperties}
               >
                 {/* Gradient Header */}
                 <div
@@ -287,10 +228,7 @@ const Projects: React.FC = () => {
 
                   <div className="mb-5">
                     {project.features.map((feature, i) => (
-                      <div
-                        key={i}
-                        className="flex items-start gap-2.5 mb-2.5 group/item"
-                      >
+                      <div key={i} className="flex items-start gap-2.5 mb-2.5 group/item">
                         <span className="w-[5px] h-[5px] rounded-full bg-blue-500 mt-[7px] shrink-0 group-hover/item:bg-blue-400 transition-colors" />
                         <span className="text-[13px] text-[#8b8b9e] leading-relaxed group-hover/item:text-[#b0b0c0] transition-colors">
                           {feature}
@@ -304,7 +242,7 @@ const Projects: React.FC = () => {
                       {project.technologies.map((tech, i) => (
                         <span
                           key={i}
-                          className="px-2.5 py-1 bg-white/[0.03] border border-white/[0.06] rounded-md text-xs text-[#5a5a6e] font-medium hover:border-white/[0.12] hover:text-[#8b8b9e] transition-all duration-200"
+                          className="px-2.5 py-1 bg-white/[0.03] border border-white/[0.06] rounded-md text-xs text-[#5a5a6e] font-medium hover:border-white/[0.12] hover:text-[#8b8b9e] transition-colors duration-200"
                         >
                           {tech}
                         </span>
@@ -314,8 +252,7 @@ const Projects: React.FC = () => {
                     {project.demoUrl && (
                       <button
                         onClick={() => {
-                          const id =
-                            project.demoUrl!.match(/\/d\/(.+?)\//)?.[1];
+                          const id = project.demoUrl!.match(/\/d\/(.+?)\//)?.[1];
                           if (id)
                             setActiveVideo(
                               `https://drive.google.com/file/d/${id}/preview`,
@@ -330,23 +267,19 @@ const Projects: React.FC = () => {
                   </div>
                 </div>
               </motion.div>
-            )})}
-
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Video Modal */}
+      {/* Video Modal — ⚡ CSS transition instead of motion spring */}
       {activeVideo && (
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          className="video-modal-backdrop fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
           onClick={() => setActiveVideo(null)}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="relative w-[90vw] max-w-4xl aspect-video rounded-2xl overflow-hidden shadow-2xl"
+          <div
+            className="video-modal-content relative w-[90vw] max-w-4xl aspect-video rounded-2xl overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <iframe
@@ -361,7 +294,7 @@ const Projects: React.FC = () => {
             >
               ✕
             </button>
-          </motion.div>
+          </div>
         </div>
       )}
     </>

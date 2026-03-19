@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "motion/react";
 import { AiOutlineDownload, AiOutlineMail } from "react-icons/ai";
 import { presets } from "../utils/motion";
 
 const Hero: React.FC = () => {
-  const particles = Array.from({ length: 20 }, (_, i) => ({
-    left: `${Math.random() * 100}%`,
-    width: `${1 + Math.random() * 2}px`,
-    height: `${1 + Math.random() * 2}px`,
-    animationDuration: `${8 + Math.random() * 12}s`,
-    animationDelay: `${Math.random() * 10}s`,
-    background: ["#3b82f6", "#06b6d4", "#8b5cf6", "#10b981"][i % 4],
-    opacity: 0.3 + Math.random() * 0.4,
-    bottom: `-${Math.random() * 20}px`,
-  }));
+  // ⚡ Reduced from 20 → 12 particles, CSS hides extras on mobile via :nth-child(n+9)
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 12 }, (_, i) => ({
+        left: `${Math.random() * 100}%`,
+        width: `${1 + Math.random() * 2}px`,
+        height: `${1 + Math.random() * 2}px`,
+        animationDuration: `${10 + Math.random() * 12}s`,
+        animationDelay: `${Math.random() * 8}s`,
+        background: ["#3b82f6", "#06b6d4", "#8b5cf6", "#10b981"][i % 4],
+        opacity: 0.3 + Math.random() * 0.4,
+        bottom: `-${Math.random() * 20}px`,
+      })),
+    []
+  );
 
   const badge = presets.scalePop();
   const name = presets.slideLeft(0.05);
-  const title = presets.blurIn(0.1);
+  const title = presets.fadeUp(0.1);
   const desc = presets.fadeUp(0.15);
   const metrics = presets.fadeIn(0.2);
   const ctas = presets.springUp(0.35);
@@ -39,23 +44,40 @@ const Hero: React.FC = () => {
       <div className="section-inner pt-28 pb-20 w-full max-md:text-center max-md:flex max-md:flex-col max-md:items-center">
         <motion.div
           {...badge}
+          viewport={{ once: true }}
           className="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/25 rounded-full text-emerald-400 text-[13px] font-semibold mb-8 backdrop-blur-sm"
+          style={{ willChange: "transform, opacity" }}
         >
           <span className="w-2 h-2 bg-emerald-400 rounded-full inline-block animate-pulse" />
           Available for new opportunities
         </motion.div>
 
-        <motion.h1 {...name} className="text-[clamp(3rem,7vw,5rem)] font-black leading-[1.05] tracking-tight mb-4">
+        <motion.h1
+          {...name}
+          viewport={{ once: true }}
+          className="text-[clamp(3rem,7vw,5rem)] font-black leading-[1.05] tracking-tight mb-4"
+          style={{ willChange: "transform, opacity" }}
+        >
           <span className="text-[#f0f0f5]">ĐỖ VĂN </span>
           <span className="gradient-text">NAM</span>
           <span className="typing-cursor" />
         </motion.h1>
 
-        <motion.h2 {...title} className="text-[clamp(1.2rem,3vw,1.6rem)] font-semibold text-[#6b6b80] tracking-[0.2em] uppercase mb-8">
+        <motion.h2
+          {...title}
+          viewport={{ once: true }}
+          className="text-[clamp(1.2rem,3vw,1.6rem)] font-semibold text-[#6b6b80] tracking-[0.2em] uppercase mb-8"
+          style={{ willChange: "transform, opacity" }}
+        >
           Full-Stack Developer
         </motion.h2>
 
-        <motion.p {...desc} className="text-lg text-[#8b8b9e] leading-relaxed max-w-[620px] mb-10">
+        <motion.p
+          {...desc}
+          viewport={{ once: true }}
+          className="text-lg text-[#8b8b9e] leading-relaxed max-w-[620px] mb-10"
+          style={{ willChange: "transform, opacity" }}
+        >
           3+ years building production web apps with{" "}
           <span className="text-[#f0f0f5] font-medium">ReactJS</span>,{" "}
           <span className="text-[#f0f0f5] font-medium">NextJS</span>,{" "}
@@ -65,7 +87,12 @@ const Hero: React.FC = () => {
           systems for Japanese enterprise clients.
         </motion.p>
 
-        <motion.div {...metrics} className="flex gap-10 mb-12 flex-wrap max-md:justify-center">
+        <motion.div
+          {...metrics}
+          viewport={{ once: true }}
+          className="flex gap-10 mb-12 flex-wrap max-md:justify-center"
+          style={{ willChange: "transform, opacity" }}
+        >
           {[
             { value: "3+", label: "Years Exp." },
             { value: "10+", label: "Projects" },
@@ -73,8 +100,10 @@ const Hero: React.FC = () => {
           ].map((stat, i) => (
             <motion.div
               key={i}
-              {...presets.springPop(0.25 + i * 0.06)}
+              {...presets.scalePop(0.25 + i * 0.06)}
+              viewport={{ once: true }}
               className="flex flex-col items-center text-center group cursor-default"
+              style={{ willChange: "transform, opacity" }}
             >
               <span className="gradient-text text-[32px] font-extrabold leading-none transition-transform duration-300 group-hover:scale-110">
                 {stat.value}
@@ -86,7 +115,12 @@ const Hero: React.FC = () => {
           ))}
         </motion.div>
 
-        <motion.div {...ctas} className="flex gap-4 flex-wrap max-md:flex-col max-md:items-center">
+        <motion.div
+          {...ctas}
+          viewport={{ once: true }}
+          className="flex gap-4 flex-wrap max-md:flex-col max-md:items-center"
+          style={{ willChange: "transform, opacity" }}
+        >
           <button
             className="btn-primary"
             onClick={() =>

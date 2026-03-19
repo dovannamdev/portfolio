@@ -25,7 +25,13 @@ const Contact: React.FC = () => {
       <div className="glow-orb w-[300px] h-[300px] -bottom-12 -left-12 bg-violet-500" />
 
       <div className="section-inner relative z-10">
-        <motion.div {...presets.scalePop()} viewport={viewport} className="mb-12">
+        <motion.div
+          {...presets.scalePop()}
+          whileInView={presets.scalePop().animate}
+          viewport={viewport}
+          className="mb-12"
+          style={{ willChange: "transform, opacity" }}
+        >
           <div className="section-label">Connect</div>
           <h2 className="section-title">
             Get In <span className="gradient-text">Touch</span>
@@ -41,9 +47,10 @@ const Contact: React.FC = () => {
             return (
               <motion.div
                 key={index}
-                {...presets.springPop(index * 0.06)}
-                whileInView={presets.springPop(index * 0.06).animate}
+                {...presets.fadeUp(index * 0.06)}
+                whileInView={presets.fadeUp(index * 0.06).animate}
                 viewport={{ once: true, margin: "-30px" }}
+                style={{ willChange: "transform, opacity" }}
               >
                 <Tag
                   className="glass-card gradient-border flex items-center gap-4 p-5 no-underline h-full"

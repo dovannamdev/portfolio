@@ -50,7 +50,13 @@ const Experience: React.FC = () => {
       <div className="glow-orb w-[400px] h-[400px] -top-48 -left-32 bg-blue-500" />
 
       <div className="section-inner">
-        <motion.div {...presets.blurIn()} viewport={viewport} className="mb-12">
+        <motion.div
+          {...presets.fadeUp()}
+          whileInView={presets.fadeUp().animate}
+          viewport={viewport}
+          className="mb-12"
+          style={{ willChange: "transform, opacity" }}
+        >
           <div className="section-label">Career</div>
           <h2 className="section-title">
             Work <span className="gradient-text">Experience</span>
@@ -63,16 +69,19 @@ const Experience: React.FC = () => {
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
-              {...presets.slideLeft(index * 0.15)}
+              {...presets.slideLeft(index * 0.12)}
+              whileInView={presets.slideLeft(index * 0.12).animate}
               viewport={viewport}
               className={`relative ${index < experiences.length - 1 ? "mb-12" : ""}`}
+              style={{ willChange: "transform, opacity" }}
             >
               <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 400, damping: 15, delay: index * 0.15 }}
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: index * 0.12 }}
                 viewport={{ once: true }}
                 className={`timeline-dot absolute -left-14 top-0 bg-gradient-to-br ${exp.gradient} ${exp.shadow} shadow-lg`}
+                style={{ willChange: "transform, opacity" }}
               >
                 {exp.icon}
               </motion.div>

@@ -20,8 +20,6 @@
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-/* Tailwind v4 preflight handles box-sizing & resets */
-
 html {
   scroll-behavior: smooth;
   font-size: 16px;
@@ -50,9 +48,11 @@ body {
   border-radius: 16px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
   position: relative;
   overflow: hidden;
+  will-change: transform;
+  transform: translateZ(0);
 }
 .glass-card::before {
   content: '';
@@ -63,11 +63,13 @@ body {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
 }
-.glass-card:hover {
-  background: var(--color-bg-card-hover);
-  border-color: var(--color-border-hover);
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35), 0 0 80px rgba(59, 130, 246, 0.08);
+/* ⚡ Desktop-only hover transform to avoid mobile jank */
+@media (hover: hover) {
+  .glass-card:hover {
+    background: var(--color-bg-card-hover);
+    border-color: var(--color-border-hover);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35), 0 0 80px rgba(59, 130, 246, 0.08);
+  }
 }
 
 /* ===== Section ===== */
@@ -97,6 +99,7 @@ body {
   letter-spacing: 1px;
   text-transform: uppercase;
   margin-bottom: 16px;
+  transform: translateZ(0);
 }
 .section-title {
   font-size: clamp(2rem, 4vw, 2.75rem);
@@ -105,6 +108,9 @@ body {
   margin-bottom: 16px;
   line-height: 1.2;
   letter-spacing: -0.03em;
+  /* ⚡ GPU layer promotion — prevents re-rasterization during parent opacity/transform animation */
+  transform: translateZ(0);
+  will-change: transform;
 }
 .section-subtitle {
   font-size: 1.1rem;
@@ -119,6 +125,11 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* ⚡ GPU layer: background-clip:text + opacity animation = jank without this */
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* ===== Animated Gradient BG ===== */
@@ -140,36 +151,33 @@ body {
   filter: blur(100px);
   opacity: 0.12;
   pointer-events: none;
+  /* ⚡ Promote to GPU layer and use simpler animation */
+  will-change: transform;
+  transform: translateZ(0);
   animation: orbFloat 20s ease-in-out infinite alternate;
 }
 .glow-orb:nth-child(2) { animation-delay: -5s; animation-duration: 25s; }
 .glow-orb:nth-child(3) { animation-delay: -10s; animation-duration: 18s; }
 @keyframes orbFloat {
-  0% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -20px) scale(1.05); }
-  66% { transform: translate(-20px, 15px) scale(0.95); }
-  100% { transform: translate(10px, -10px) scale(1.02); }
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(20px, -15px, 0) scale(1.03); }
+  66% { transform: translate3d(-15px, 10px, 0) scale(0.97); }
+  100% { transform: translate3d(8px, -8px, 0) scale(1.01); }
 }
-
-/* ===== Smooth Scrolling ===== */
-html {
-  scroll-behavior: smooth;
-}
-
-
 
 /* ===== Floating Particles ===== */
 .particle {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
+  will-change: transform, opacity;
   animation: particleFloat linear infinite;
 }
 @keyframes particleFloat {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
   10% { opacity: 1; }
   90% { opacity: 1; }
-  100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+  100% { transform: translate3d(0, -100vh, 0) rotate(720deg); opacity: 0; }
 }
 
 /* ===== Tag ===== */
@@ -183,14 +191,15 @@ html {
   font-size: 13px;
   font-weight: 500;
   color: var(--color-text-secondary);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  transform: translateZ(0);
 }
-.skill-tag:hover {
-  background: rgba(59, 130, 246, 0.1);
-  border-color: rgba(59, 130, 246, 0.3);
-  color: var(--color-accent-blue);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+@media (hover: hover) {
+  .skill-tag:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: var(--color-accent-blue);
+  }
 }
 
 /* ===== Timeline ===== */
@@ -213,10 +222,8 @@ html {
   position: relative;
   z-index: 2;
   box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-  transition: box-shadow 0.3s ease;
-}
-.timeline-dot:hover {
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* ===== Button Styles ===== */
@@ -233,7 +240,7 @@ html {
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-decoration: none;
   position: relative;
   overflow: hidden;
@@ -249,12 +256,17 @@ html {
   transform: rotate(45deg) translateX(-100%);
   transition: transform 0.6s ease;
 }
-.btn-primary:hover::after {
-  transform: rotate(45deg) translateX(100%);
+@media (hover: hover) {
+  .btn-primary:hover::after {
+    transform: rotate(45deg) translateX(100%);
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(59, 130, 246, 0.35);
+  }
 }
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.35);
+.btn-primary:active {
+  transform: scale(0.97);
 }
 
 .btn-secondary {
@@ -270,14 +282,19 @@ html {
   border: 1px solid var(--color-border);
   border-radius: 12px;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   text-decoration: none;
 }
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--color-border-hover);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+@media (hover: hover) {
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--color-border-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+.btn-secondary:active {
+  transform: scale(0.97);
 }
 
 /* ===== Hero Typing Cursor ===== */
@@ -321,12 +338,78 @@ html {
   transition: opacity 0.4s ease;
   pointer-events: none;
 }
-.gradient-border:hover::after {
+@media (hover: hover) {
+  .gradient-border:hover::after {
+    opacity: 1;
+  }
+}
+
+/* ===== Mobile Menu Overlay ===== */
+.mobile-menu-overlay {
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+.mobile-menu-overlay.open {
   opacity: 1;
+  visibility: visible;
+}
+.mobile-menu-item {
+  transform: translateX(-20px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.mobile-menu-overlay.open .mobile-menu-item {
+  transform: translateX(0);
+  opacity: 1;
+}
+.mobile-menu-overlay.open .mobile-menu-item:nth-child(1) { transition-delay: 0.05s; }
+.mobile-menu-overlay.open .mobile-menu-item:nth-child(2) { transition-delay: 0.1s; }
+.mobile-menu-overlay.open .mobile-menu-item:nth-child(3) { transition-delay: 0.15s; }
+.mobile-menu-overlay.open .mobile-menu-item:nth-child(4) { transition-delay: 0.2s; }
+.mobile-menu-overlay.open .mobile-menu-item:nth-child(5) { transition-delay: 0.25s; }
+
+/* ===== Video Modal ===== */
+.video-modal-backdrop {
+  transition: opacity 0.25s ease;
+}
+.video-modal-content {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .section { padding: 64px 0; }
   .section-inner { padding: 0 16px; }
+
+  /* ⚡ Reduce glow orb intensity on mobile */
+  .glow-orb {
+    filter: blur(60px);
+    opacity: 0.08;
+    animation: none;
+  }
+
+  /* ⚡ Simplify particles on mobile */
+  .particle:nth-child(n+9) {
+    display: none;
+  }
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .glow-orb,
+  .particle,
+  .typing-cursor {
+    animation: none !important;
+  }
+  .gradient-bg {
+    animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

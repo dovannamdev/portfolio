@@ -12,7 +12,13 @@ const About: React.FC = () => {
 
       <div className="section-inner">
         {/* Header */}
-        <motion.div {...presets.slideLeft()} viewport={viewport} className="mb-12">
+        <motion.div
+          {...presets.slideLeft()}
+          whileInView={presets.slideLeft().animate}
+          viewport={viewport}
+          className="mb-12"
+          style={{ willChange: "transform, opacity" }}
+        >
           <div className="section-label">About</div>
           <h2 className="section-title">Profile</h2>
         </motion.div>
@@ -21,8 +27,10 @@ const About: React.FC = () => {
           {/* Profile Summary — spans 2 cols */}
           <motion.div
             {...presets.fadeUp()}
+            whileInView={presets.fadeUp().animate}
             viewport={viewport}
             className="lg:col-span-2 glass-card gradient-border p-8 relative overflow-hidden"
+            style={{ willChange: "transform, opacity" }}
           >
             {/* Decorative corner accent */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-500/10 to-transparent rounded-bl-[80px]" />
@@ -44,9 +52,9 @@ const About: React.FC = () => {
                   <span className="text-blue-400/90">NextJS</span>,{" "}
                   <span className="text-emerald-400/90">NodeJS</span> and{" "}
                   <span className="text-emerald-400/90">NestJS</span>.
-                  Collaborated in a 4-member team on the two most recent projects,
-                  focusing on third-party API integrations, data-heavy features,
-                  and subscription workflows using Stripe and bank transfers.
+                  Hands-on experience in team-based development, specializing in
+                  third-party API integrations, data-intensive features, and
+                  payment systems with Stripe.
                 </p>
                 <p className="text-[16px] text-[#8b8b9e] leading-[1.85]">
                   Hands-on contributor with strong end-to-end ownership and a
@@ -68,7 +76,7 @@ const About: React.FC = () => {
                 ].map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1.5 bg-blue-500/[0.06] border border-blue-500/15 rounded-lg text-blue-400/80 text-xs font-medium hover:bg-blue-500/10 hover:border-blue-500/25 transition-all duration-200 cursor-default"
+                    className="px-3 py-1.5 bg-blue-500/[0.06] border border-blue-500/15 rounded-lg text-blue-400/80 text-xs font-medium hover:bg-blue-500/10 hover:border-blue-500/25 transition-colors duration-200 cursor-default"
                   >
                     {tag}
                   </span>
@@ -81,9 +89,11 @@ const About: React.FC = () => {
           <div className="flex flex-col gap-6">
             {/* Education Card */}
             <motion.div
-              {...presets.rotateX(0.1)}
+              {...presets.fadeUp(0.1)}
+              whileInView={presets.fadeUp(0.1).animate}
               viewport={viewport}
               className="glass-card gradient-border p-6 relative overflow-hidden flex-1"
+              style={{ willChange: "transform, opacity" }}
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-violet-500 to-pink-500" />
 
@@ -112,9 +122,11 @@ const About: React.FC = () => {
 
             {/* Quick Stats Card */}
             <motion.div
-              {...presets.springPop(0.2)}
+              {...presets.scalePop(0.2)}
+              whileInView={presets.scalePop(0.2).animate}
               viewport={viewport}
               className="glass-card gradient-border p-6"
+              style={{ willChange: "transform, opacity" }}
             >
               <h3 className="text-sm font-semibold text-[#5a5a6e] uppercase tracking-wider mb-4">
                 Highlights

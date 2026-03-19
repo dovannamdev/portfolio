@@ -73,7 +73,13 @@ const Skills: React.FC = () => {
       <div className="glow-orb w-[300px] h-[300px] top-1/3 -left-24 bg-cyan-500" />
 
       <div className="section-inner">
-        <motion.div {...presets.fadeUp()} viewport={viewport} className="mb-12">
+        <motion.div
+          {...presets.fadeUp()}
+          whileInView={presets.fadeUp().animate}
+          viewport={viewport}
+          className="mb-12"
+          style={{ willChange: "transform, opacity" }}
+        >
           <div className="section-label">Expertise</div>
           <h2 className="section-title">
             Skills & <span className="gradient-text">Technologies</span>
@@ -84,9 +90,11 @@ const Skills: React.FC = () => {
           {categories.map((cat, index) => (
             <motion.div
               key={index}
-              {...presets.rotateY(index * 0.08)}
+              {...presets.fadeUp(index * 0.08)}
+              whileInView={presets.fadeUp(index * 0.08).animate}
               viewport={{ once: true, margin: "-30px" }}
               className="glass-card gradient-border !p-0 overflow-hidden"
+              style={{ willChange: "transform, opacity" }}
             >
               <div className={`bg-gradient-to-r ${cat.gradient} px-5 py-4 flex items-center gap-3 relative overflow-hidden`}>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent opacity-0 hover:opacity-100 transition-opacity duration-700" />
@@ -99,23 +107,21 @@ const Skills: React.FC = () => {
                 </div>
               </div>
 
+              {/* ⚡ Removed individual motion.div per skill — was 23+ IntersectionObservers!
+                  Now uses a single container animation + CSS stagger transitions */}
               <div className="p-4">
                 {cat.skills.map((skill, i) => (
-                  <motion.div
+                  <div
                     key={i}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.08 + i * 0.03 }}
-                    viewport={{ once: true }}
-                    className="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/[0.03] transition-all duration-200 group/skill cursor-default"
+                    className="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/[0.03] transition-colors duration-200 group/skill cursor-default"
                   >
                     <span className="text-sm font-medium text-[#e0e0e8] group-hover/skill:text-[#f0f0f5] transition-colors">
                       {skill.name}
                     </span>
-                    <span className="text-xs text-[#5a5a6e] font-medium px-2.5 py-0.5 bg-white/[0.03] rounded-md border border-white/[0.04] group-hover/skill:border-white/[0.1] transition-colors">
+                    <span className="text-xs text-[#5a5a6e] font-medium px-2.5 py-0.5 bg-white/[0.03] rounded-md border border-white/[0.04] group-hover/skill:border-white/[0.1] transition-[border-color] duration-200">
                       {skill.exp}
                     </span>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </motion.div>

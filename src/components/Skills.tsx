@@ -15,6 +15,7 @@ const Skills: React.FC = () => {
       icon: <AiOutlineLayout className="text-white text-lg" />,
       gradient: "from-blue-500 to-cyan-500",
       shadow: "shadow-blue-500/20",
+      accent: "blue",
       skills: [
         { name: "React", exp: "3+ yrs" },
         { name: "NextJS", exp: "2+ yrs" },
@@ -31,6 +32,7 @@ const Skills: React.FC = () => {
       icon: <AiOutlineCode className="text-white text-lg" />,
       gradient: "from-emerald-500 to-cyan-500",
       shadow: "shadow-emerald-500/20",
+      accent: "emerald",
       skills: [
         { name: "Node.js", exp: "2 yrs" },
         { name: "NestJS", exp: "2 yrs" },
@@ -44,6 +46,7 @@ const Skills: React.FC = () => {
       icon: <AiOutlineDatabase className="text-white text-lg" />,
       gradient: "from-violet-500 to-pink-500",
       shadow: "shadow-violet-500/20",
+      accent: "violet",
       skills: [
         { name: "PostgreSQL", exp: "2 yrs" },
         { name: "MySQL", exp: "2 yrs" },
@@ -57,6 +60,7 @@ const Skills: React.FC = () => {
       icon: <AiOutlineCloud className="text-white text-lg" />,
       gradient: "from-amber-500 to-red-500",
       shadow: "shadow-amber-500/20",
+      accent: "amber",
       skills: [
         { name: "Docker", exp: "1.5 yrs" },
         { name: "Git", exp: "3 yrs" },
@@ -93,11 +97,24 @@ const Skills: React.FC = () => {
               {...presets.fadeUp(index * 0.08)}
               whileInView={presets.fadeUp(index * 0.08).animate}
               viewport={{ once: true, margin: "-30px" }}
-              className="glass-card gradient-border !p-0 overflow-hidden"
+              className="glass-card gradient-border !p-0 overflow-visible group relative"
               style={{ willChange: "transform, opacity" }}
             >
-              <div className={`bg-gradient-to-r ${cat.gradient} px-5 py-4 flex items-center gap-3 relative overflow-hidden`}>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent opacity-0 hover:opacity-100 transition-opacity duration-700" />
+              {/* ⚡ Subtle gradient overlay on hover (Dark Grid pattern) */}
+              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-[1]">
+                <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-white/[0.08] via-white/[0.03] to-transparent" />
+              </div>
+
+              {/* ⚡ Corner accent squares on hover (Dark Grid pattern) */}
+              <div className="pointer-events-none absolute inset-0 hidden group-hover:block z-[2]">
+                <div className="absolute -left-1.5 -top-1.5 h-2.5 w-2.5 rounded-sm bg-blue-400/80" />
+                <div className="absolute -right-1.5 -top-1.5 h-2.5 w-2.5 rounded-sm bg-violet-400/80" />
+                <div className="absolute -left-1.5 -bottom-1.5 h-2.5 w-2.5 rounded-sm bg-cyan-400/80" />
+                <div className="absolute -right-1.5 -bottom-1.5 h-2.5 w-2.5 rounded-sm bg-emerald-400/80" />
+              </div>
+
+              <div className={`bg-gradient-to-r ${cat.gradient} px-5 py-4 flex items-center gap-3 relative overflow-hidden rounded-t-2xl`}>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <div className={`w-10 h-10 bg-white/20 rounded-[10px] flex items-center justify-center backdrop-blur-sm shadow-lg ${cat.shadow}`}>
                   {cat.icon}
                 </div>
@@ -107,18 +124,16 @@ const Skills: React.FC = () => {
                 </div>
               </div>
 
-              {/* ⚡ Removed individual motion.div per skill — was 23+ IntersectionObservers!
-                  Now uses a single container animation + CSS stagger transitions */}
-              <div className="p-4">
+              <div className="p-4 relative z-10">
                 {cat.skills.map((skill, i) => (
                   <div
                     key={i}
-                    className="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/[0.03] transition-colors duration-200 group/skill cursor-default"
+                    className="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/[0.03] transition-all duration-200 group/skill cursor-default"
                   >
                     <span className="text-sm font-medium text-[#e0e0e8] group-hover/skill:text-[#f0f0f5] transition-colors">
                       {skill.name}
                     </span>
-                    <span className="text-xs text-[#5a5a6e] font-medium px-2.5 py-0.5 bg-white/[0.03] rounded-md border border-white/[0.04] group-hover/skill:border-white/[0.1] transition-[border-color] duration-200">
+                    <span className="text-xs text-[#5a5a6e] font-medium px-2.5 py-0.5 bg-white/[0.03] rounded-md border border-white/[0.04] group-hover/skill:border-white/[0.1] group-hover/skill:text-[#8b8b9e] transition-all duration-200">
                       {skill.exp}
                     </span>
                   </div>

@@ -80,7 +80,7 @@ const Experience: React.FC = () => {
                 whileInView={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: index * 0.12 }}
                 viewport={{ once: true }}
-                className={`timeline-dot absolute -left-14 top-0 bg-gradient-to-br ${exp.gradient} ${exp.shadow} shadow-lg`}
+                className={`timeline-dot absolute -left-14 top-0 bg-gradient-to-br ${exp.gradient} ${exp.shadow} shadow-lg ring-4 ring-current/[0.08] animate-[dotPulse_3s_ease-in-out_infinite]`}
                 style={{ willChange: "transform, opacity" }}
               >
                 {exp.icon}
@@ -112,7 +112,7 @@ const Experience: React.FC = () => {
                   <div className="mb-5">
                     {exp.achievements.map((a, i) => (
                       <div key={i} className="flex items-start gap-3 mb-3 group">
-                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0 group-hover:scale-150 transition-transform duration-200" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0 group-hover:scale-150 group-hover:bg-blue-400 transition-all duration-200" />
                         <span className="text-[15px] text-[#8b8b9e] leading-relaxed group-hover:text-[#b0b0c0] transition-colors duration-200">
                           {a}
                         </span>

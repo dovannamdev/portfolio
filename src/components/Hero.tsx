@@ -1,7 +1,60 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import { AiOutlineDownload, AiOutlineMail } from "react-icons/ai";
 import { presets } from "../utils/motion";
+
+/* ── BlurText — letter-by-letter blur reveal (inspired by magic-mcp) ── */
+interface BlurTextProps {
+  text: string;
+  delay?: number;
+  className?: string;
+  letterClassName?: string;
+  style?: React.CSSProperties;
+}
+
+const BlurText: React.FC<BlurTextProps> = ({
+  text,
+  delay = 60,
+  className = "",
+  letterClassName = "",
+  style,
+}) => {
+  const [inView, setInView] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold: 0.1 },
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const letters = useMemo(() => text.split(""), [text]);
+
+  return (
+    <span ref={ref} className={className} style={style}>
+      {letters.map((char, i) => (
+        <span
+          key={i}
+          className={letterClassName}
+          style={{
+            display: "inline-block",
+            filter: inView ? "blur(0px)" : "blur(12px)",
+            opacity: inView ? 1 : 0,
+            transform: inView ? "translateY(0) scale(1)" : "translateY(-18px) scale(0.9)",
+            transition: `all 0.5s cubic-bezier(0.22, 1, 0.36, 1) ${i * delay}ms`,
+          }}
+        >
+          {char === " " ? "\u00A0" : char}
+        </span>
+      ))}
+    </span>
+  );
+};
 
 const Hero: React.FC = () => {
   // ⚡ Reduced from 20 → 12 particles, CSS hides extras on mobile via :nth-child(n+9)
@@ -17,11 +70,10 @@ const Hero: React.FC = () => {
         opacity: 0.3 + Math.random() * 0.4,
         bottom: `-${Math.random() * 20}px`,
       })),
-    []
+    [],
   );
 
   const badge = presets.scalePop();
-  const name = presets.slideLeft(0.05);
   const title = presets.fadeUp(0.1);
   const desc = presets.fadeUp(0.15);
   const metrics = presets.fadeIn(0.2);
@@ -52,16 +104,20 @@ const Hero: React.FC = () => {
           Available for new opportunities
         </motion.div>
 
-        <motion.h1
-          {...name}
-          viewport={{ once: true }}
-          className="text-[clamp(3rem,7vw,5rem)] font-black leading-[1.05] tracking-tight mb-4"
-          style={{ willChange: "transform, opacity" }}
-        >
-          <span className="text-[#f0f0f5]">ĐỖ VĂN </span>
-          <span className="gradient-text">NAM</span>
+        {/* ⚡ BlurText name reveal — letter-by-letter blur animation */}
+        <h1 className="text-[clamp(3rem,7vw,5rem)] font-black leading-[1.05] tracking-tight mb-4">
+          <BlurText
+            text="ĐỖ VĂN "
+            delay={70}
+            style={{ color: "#f0f0f5" }}
+          />
+          <BlurText
+            text="NAM"
+            delay={70}
+            letterClassName="gradient-text"
+          />
           <span className="typing-cursor" />
-        </motion.h1>
+        </h1>
 
         <motion.h2
           {...title}

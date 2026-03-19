@@ -186,7 +186,7 @@ const Projects: React.FC = () => {
                 {...presets.fadeUp(index * 0.06)}
                 whileInView={presets.fadeUp(index * 0.06).animate}
                 viewport={{ once: true, margin: "-30px" }}
-                className="glass-card !p-0 overflow-hidden group flex flex-col"
+                className="glass-card !p-0 overflow-hidden group flex flex-col transition-transform duration-300 hover:-translate-y-1.5"
                 style={{
                   willChange: "transform, opacity",
                   "--hover-shadow": project.shadow,
@@ -196,7 +196,7 @@ const Projects: React.FC = () => {
                 <div
                   className={`bg-gradient-to-r ${project.gradient} px-6 py-5 flex items-start justify-between gap-3 relative overflow-hidden`}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.12] to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out" />
                   <div className="relative z-10 flex-1">
                     <h3 className="text-[17px] font-bold text-white mb-1.5 leading-snug">
                       {project.title}
@@ -242,7 +242,7 @@ const Projects: React.FC = () => {
                       {project.technologies.map((tech, i) => (
                         <span
                           key={i}
-                          className="px-2.5 py-1 bg-white/[0.03] border border-white/[0.06] rounded-md text-xs text-[#5a5a6e] font-medium hover:border-white/[0.12] hover:text-[#8b8b9e] transition-colors duration-200"
+                          className="px-2.5 py-1 bg-white/[0.03] border border-white/[0.06] rounded-md text-xs text-[#5a5a6e] font-medium hover:border-white/[0.15] hover:text-[#8b8b9e] hover:bg-white/[0.06] hover:scale-105 transition-all duration-200 cursor-default"
                         >
                           {tech}
                         </span>
